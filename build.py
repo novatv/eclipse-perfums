@@ -25,7 +25,7 @@ for i in ids:
 used_notes={n:notemap[n] for i in ids for L in data[i]['notes'].values() for n in L if n in notemap}
 sub_meta={i:meta.get(i,{}) for i in ids}
 blob="const DATA="+json.dumps(list(sub.values()),ensure_ascii=False)+";\nconst NOTE_IMG="+json.dumps(used_notes,ensure_ascii=False)+";\nconst META="+json.dumps(sub_meta,ensure_ascii=False)+";\nconst SHOP="+json.dumps(shop,ensure_ascii=False)+";\n"
-for tpl,out in (('template-lookbook.html','index.html'),('template-oscuro.html','oscuro/index.html')):
+for tpl,out in (('template-luxe.html','index.html'),('template-lookbook.html','claro/index.html'),('template-oscuro.html','oscuro/index.html')):
     s=open(HERE/tpl,encoding='utf-8').read().replace('/*__DATA__*/',blob)
     (HERE/out).parent.mkdir(exist_ok=True); open(HERE/out,'w',encoding='utf-8').write(s)
 print('productos:',len(ids),'| iconos de nota:',len(used_notes),'| generado index.html y oscuro/index.html')
