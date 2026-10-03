@@ -149,6 +149,17 @@ footer{position:relative}
 .sig b{display:block;width:46px;height:46px;margin:0 auto 14px;border-radius:50%;background:radial-gradient(circle at 40% 40%,var(--gold2) 0 42%,transparent 44%);box-shadow:inset 0 0 0 1px var(--gold)}
 @media (prefers-reduced-motion:reduce){h1,h2{animation:none}.hero .rays{animation:none}}
 
+.fig .pv{position:relative;width:100%;height:100%;object-fit:cover;border-radius:2px;transform:translateZ(30px);cursor:zoom-in;filter:saturate(1.05) contrast(1.03);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.fig:has(.pv){background:#000;overflow:hidden}
+.fig:has(.pv) .halo,.fig:has(.pv) .glow2,.fig:has(.pv) .refl,.fig:has(.pv) .ring{display:none}
+.fig:has(.pv)::before{inset:12px;z-index:2}
+.fig:has(.pv) .num{z-index:3}
+.fig:has(.pv) .shine{z-index:2}
+.fig:has(.pv) .spark{z-index:2}
+.row.pre .fig .pv{opacity:0;transform:translateZ(30px) scale(1.06)}
+.row .fig .pv{transition:opacity 1.1s cubic-bezier(.2,.8,.2,1),transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.hero .ring video{position:relative;z-index:1;width:62%;aspect-ratio:9/16;object-fit:cover;border-radius:12px;box-shadow:0 50px 80px -30px rgba(0,0,0,.8),0 0 60px rgba(201,169,110,.18);animation:float 8s ease-in-out infinite}
+
 </style>
 </head>
 <body>
@@ -182,6 +193,8 @@ const NOTE_IMG={"flor de azahar del naranjo": "16", "mandarina": "82", "notas ac
 const META={"lm-city-of-dreams": {"price": 27, "inspired": "73344"}, "100148": {"price": 35, "votes": {"loves": 131, "likes": 101, "neutral": 26, "dislike": 11, "hate": 4, "winter": 24, "spring": 168, "summer": 190, "autumn": 80, "day": 186, "night": 53}}, "lm-sandal-wood": {"price": 22, "inspiredName": "Giorgio Armani Stronger With You Sandalwood"}};
 const SHOP=[{"id": "lm-city-of-dreams", "price": 45}, {"id": "100148", "price": 35}, {"id": "lm-sandal-wood", "price": 45}];
 const IMG={"lm-city-of-dreams": "img/lm-city-of-dreams.webp", "100148": "img/100148.webp", "lm-sandal-wood": "img/lm-sandal-wood.webp"};
+const VIDEO={"lm-city-of-dreams": "video/lm-city-of-dreams.mp4", "100148": "video/100148.mp4", "lm-sandal-wood": "video/lm-sandal-wood.mp4"};
+const CAMP={"lm-city-of-dreams": "campaign/lm-city-of-dreams.webp", "100148": "campaign/100148.webp", "lm-sandal-wood": "campaign/lm-sandal-wood.webp"};
 
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const wa=t=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(t);
@@ -192,7 +205,7 @@ const gcat=g=>g==='Hombres y Mujeres'?'unisex':g==='Hombres'?'hombre':g==='Mujer
 function insp(p){const m=META[p.id]||{}; if(m.inspired&&BY[m.inspired]) return BY[m.inspired].brand+' '+BY[m.inspired].name; return m.inspiredName||'';}
 const lvl=(l,a)=>a&&a.length?`<div class="lvl"><span class="lab">${l}</span><div class="chips">${a.map(n=>`<span class="chip"><i style="${NOTE_IMG[n]?`background-image:url(notes/${NOTE_IMG[n]}.jpg)`:''}"></i>${esc(n)}</span>`).join('')}</div></div>`:'';
 function row(it,i){ const p=BY[it.id]; if(!p) return ''; const ins=insp(p); const N=p.notes; const n=['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][i]||(i+1);
-  return `<article class="row rv pre" id="p${i+1}"><div class="fig"><span class="corner"></span><span class="num">${n}</span><div class="stage"><span class="ring"></span><span class="glow2"></span><span class="halo"></span><span class="refl"></span><img src="${imgOf(p)}" alt="${esc(p.name)}" loading="lazy" style="animation-delay:${(i*1.3)}s" data-name="${esc(p.name)}" data-brand="${esc(p.brand)}"><span class="shine"></span><span class="spot"></span>${Array.from({length:14},(_,k)=>`<span class="spark" style="--x:${12+Math.random()*76}%;--d:${4+Math.random()*5}s;--delay:${-Math.random()*8}s;--h:${40+Math.random()*45}%;--sx:${(Math.random()*40-20).toFixed(0)}px"></span>`).join()}</div></div>
+  return `<article class="row rv pre" id="p${i+1}"><div class="fig"><span class="corner"></span><span class="num">${n}</span><div class="stage"><span class="ring"></span><span class="glow2"></span><span class="halo"></span><span class="refl"></span>${VIDEO[p.id]?`<video class="pv" src="${VIDEO[p.id]}" poster="${CAMP[p.id]||imgOf(p)}" autoplay muted loop playsinline preload="metadata" data-name="${esc(p.name)}" data-brand="${esc(p.brand)}" data-cut="${imgOf(p)}"></video>`:`<img src="${imgOf(p)}" alt="${esc(p.name)}" loading="lazy" style="animation-delay:${(i*1.3)}s" data-name="${esc(p.name)}" data-brand="${esc(p.brand)}">`}<span class="shine"></span><span class="spot"></span>${Array.from({length:14},(_,k)=>`<span class="spark" style="--x:${12+Math.random()*76}%;--d:${4+Math.random()*5}s;--delay:${-Math.random()*8}s;--h:${40+Math.random()*45}%;--sx:${(Math.random()*40-20).toFixed(0)}px"></span>`).join()}</div></div>
   <div class="txt"><span class="brand">${esc(p.brand)}</span><h2>${esc(p.name)}</h2>
     <div class="facts">${p.conc?`<span><b>${esc(p.conc)}</b></span>`:''}${p.gender?`<span>${gcat(p.gender)}</span>`:''}${p.family?`<span>${esc(p.family)}</span>`:''}${p.rating?`<span>Fragrantica <b>${p.rating.toFixed(2)}</b> · ${p.votes} votos</span>`:''}</div>
     ${ins?`<span class="insp">Se parece a <b>${esc(ins)}</b></span>`:''}
@@ -222,16 +235,16 @@ function parallax(){ const vh=innerHeight; document.querySelectorAll('.row:not(.
 addEventListener('scroll',parallax,{passive:true}); addEventListener('resize',parallax);
 document.addEventListener('pointermove',e=>{ const f=e.target.closest('.fig'); document.querySelectorAll('.fig').forEach(fig=>{ const st=fig.querySelector('.stage'), sp=fig.querySelector('.spot'); if(f===fig){ const r=fig.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height; st.dataset.tilt='1'; st.style.transform=`translateY(${st.style.getPropertyValue('--py')||'0px'}) rotateY(${(x-.5)*18}deg) rotateX(${-(y-.5)*14}deg)`; if(sp){sp.style.left=(x*100)+'%'; sp.style.top=(y*100)+'%';} } else if(st.dataset.tilt){ delete st.dataset.tilt; st.style.transform=`translateY(${st.style.getPropertyValue('--py')||'0px'})`; } }); },{passive:true});
 /* vista ampliada */
-document.addEventListener('click',e=>{ const img=e.target.closest('.fig img'); if(!img) return; const fig=img.closest('.fig'); const z=document.createElement('div'); z.className='zoom'; z.style.setProperty('--aura',getComputedStyle(fig).getPropertyValue('--aura')); z.innerHTML=`<span class="zring"></span><span class="zring b"></span><img src="${img.src}" alt=""><div class="zt">${img.dataset.name}<small>${img.dataset.brand}</small></div><button class="zc" aria-label="Cerrar">×</button>`; document.body.appendChild(z); document.body.style.overflow='hidden'; const close=()=>{z.remove(); document.body.style.overflow='';}; z.addEventListener('click',ev=>{ if(ev.target===z||ev.target.classList.contains('zc')) close(); }); document.addEventListener('keydown',function k(ev){ if(ev.key==='Escape'){close(); document.removeEventListener('keydown',k);} }); });
+document.addEventListener('click',e=>{ let img=e.target.closest('.fig img, .fig video'); if(!img) return; if(img.tagName==='VIDEO'){ const v=img; img={src:v.dataset.cut, dataset:v.dataset, closest:()=>v.closest('.fig')}; } const fig=img.closest('.fig'); const z=document.createElement('div'); z.className='zoom'; z.style.setProperty('--aura',getComputedStyle(fig).getPropertyValue('--aura')); z.innerHTML=`<span class="zring"></span><span class="zring b"></span><img src="${img.src}" alt=""><div class="zt">${img.dataset.name}<small>${img.dataset.brand}</small></div><button class="zc" aria-label="Cerrar">×</button>`; document.body.appendChild(z); document.body.style.overflow='hidden'; const close=()=>{z.remove(); document.body.style.overflow='';}; z.addEventListener('click',ev=>{ if(ev.target===z||ev.target.classList.contains('zc')) close(); }); document.addEventListener('keydown',function k(ev){ if(ev.key==='Escape'){close(); document.removeEventListener('keydown',k);} }); });
 function boot(){ DATA.forEach(p=>BY[p.id]=p); const L=SHOP.filter(it=>BY[it.id]);
   document.getElementById('lista').innerHTML=L.length?L.map(row).join(''):'<div class="empty">Todavía no hay perfumes en la lista.</div>';
   document.getElementById('index').innerHTML=L.map((it,i)=>`<a href="#p${i+1}"><span>${['I','II','III','IV','V','VI','VII','VIII','IX','X'][i]||i+1}</span>${esc(BY[it.id].name)}</a>`).join('');
   const names=L.map(it=>BY[it.id].brand+' · '+BY[it.id].name); const mq=names.concat(names).map(n=>`<span>${esc(n)}</span>`).join(''); document.getElementById('mq').innerHTML=mq+mq;
-  if(L[0]) document.getElementById('ring').innerHTML=`<img src="${imgOf(BY[L[0].id])}" alt="">`;
+  if(L[0]) document.getElementById('ring').innerHTML=VIDEO[L[0].id]?`<video src="${VIDEO[L[0].id]}" poster="${CAMP[L[0].id]||''}" autoplay muted loop playsinline></video>`:`<img src="${imgOf(BY[L[0].id])}" alt="">`;
   const h=document.getElementById('h1'); let i=0; h.innerHTML=h.innerHTML.replace(/(<i>.*?<\/i>|[^\s<]+)/g,m=>`<span class="word" style="--i:${i++}">${m}</span>`);
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}}),{rootMargin:'0px 0px -10% 0px'});
   document.querySelectorAll('.rv').forEach(el=>{ if(el.getBoundingClientRect().top<innerHeight) el.classList.remove('pre'); else io.observe(el); });
-  document.querySelectorAll('.fig img').forEach(im=>{ im.addEventListener('load',()=>aura(im)); if(im.complete&&im.naturalWidth) aura(im); }); parallax();
+  document.querySelectorAll('.fig img').forEach(im=>{ im.addEventListener('load',()=>aura(im)); if(im.complete&&im.naturalWidth) aura(im); }); document.querySelectorAll('.fig video').forEach(v=>{ const im=new Image(); im.onload=()=>{ try{ const c=document.createElement('canvas'); c.width=24;c.height=32; c.getContext('2d').drawImage(im,0,0,24,32); const fake={closest:()=>v.closest('.fig')}; aura(Object.assign(im,{closest:fake.closest})); }catch(e){} }; im.src=v.dataset.cut; }); parallax();
 }
 boot();
 </script>

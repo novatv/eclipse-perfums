@@ -27,9 +27,15 @@ IMG={}
 for i in ids:
     c=HERE/'cut'/(i+'.webp')
     if c.exists(): shutil.copy(c, HERE/'img'/(i+'.webp')); IMG[i]='img/'+i+'.webp'
+VIDEO={}; CAMP={}
+for i in ids:
+    v=HERE/'video'/(i+'.mp4')
+    if v.exists(): VIDEO[i]='video/'+i+'.mp4'
+    c=HERE/'campaign'/(i+'.webp')
+    if c.exists(): CAMP[i]='campaign/'+i+'.webp'
 used_notes={n:notemap[n] for i in ids for L in data[i]['notes'].values() for n in L if n in notemap}
 sub_meta={i:meta.get(i,{}) for i in ids}
-blob="const DATA="+json.dumps(list(sub.values()),ensure_ascii=False)+";\nconst NOTE_IMG="+json.dumps(used_notes,ensure_ascii=False)+";\nconst META="+json.dumps(sub_meta,ensure_ascii=False)+";\nconst SHOP="+json.dumps(shop,ensure_ascii=False)+";\nconst IMG="+json.dumps(IMG)+";\n"
+blob="const DATA="+json.dumps(list(sub.values()),ensure_ascii=False)+";\nconst NOTE_IMG="+json.dumps(used_notes,ensure_ascii=False)+";\nconst META="+json.dumps(sub_meta,ensure_ascii=False)+";\nconst SHOP="+json.dumps(shop,ensure_ascii=False)+";\nconst IMG="+json.dumps(IMG)+";\nconst VIDEO="+json.dumps(VIDEO)+";\nconst CAMP="+json.dumps(CAMP)+";\n"
 for tpl,out in (('template-luxe.html','index.html'),('template-lookbook.html','claro/index.html'),('template-oscuro.html','oscuro/index.html')):
     s=open(HERE/tpl,encoding='utf-8').read().replace('/*__DATA__*/',blob)
     (HERE/out).parent.mkdir(exist_ok=True); open(HERE/out,'w',encoding='utf-8').write(s)
