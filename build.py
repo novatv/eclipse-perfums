@@ -22,6 +22,11 @@ for i in ids:
         for n in L:
             nid=notemap.get(n)
             if nid and (SRC/'notes'/(nid+'.jpg')).exists(): shutil.copy(SRC/'notes'/(nid+'.jpg'), HERE/'notes'/(nid+'.jpg'))
+# recortes con transparencia (cut/<id>.webp) tienen prioridad
+IMG={}
+for i in ids:
+    c=HERE/'cut'/(i+'.webp')
+    if c.exists(): shutil.copy(c, HERE/'img'/(i+'.webp')); IMG[i]='img/'+i+'.webp'
 used_notes={n:notemap[n] for i in ids for L in data[i]['notes'].values() for n in L if n in notemap}
 sub_meta={i:meta.get(i,{}) for i in ids}
 blob="const DATA="+json.dumps(list(sub.values()),ensure_ascii=False)+";\nconst NOTE_IMG="+json.dumps(used_notes,ensure_ascii=False)+";\nconst META="+json.dumps(sub_meta,ensure_ascii=False)+";\nconst SHOP="+json.dumps(shop,ensure_ascii=False)+";\n"

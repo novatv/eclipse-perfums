@@ -107,7 +107,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const wa=t=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(t);
 ['wa-top','wa-hero','wa-foot'].forEach(id=>document.getElementById(id).href=wa('Hola, vengo de '+SHOP_NAME+'. Quiero información sobre perfumes.'));
 let BY={};
-const imgOf=p=>p.id.startsWith('lm-')?'../img/'+p.id+'.jpg':'../img/'+p.id+'.avif';
+const imgOf=p=>(IMG[p.id]?'../'+IMG[p.id]:(p.id.startsWith('lm-')?'../img/'+p.id+'.jpg':'../img/'+p.id+'.avif'));
 const gcat=g=>g==='Hombres y Mujeres'?'unisex':g==='Hombres'?'hombre':g==='Mujeres'?'mujer':'';
 function insp(p){const m=META[p.id]||{}; if(m.inspired&&BY[m.inspired]) return BY[m.inspired].brand+' '+BY[m.inspired].name; return m.inspiredName||'';}
 function lvl(l,a){ return a&&a.length?`<div class="lvl"><span class="lab">${l}</span><div class="chips">${a.map(n=>`<span class="chip"><i style="${NOTE_IMG[n]?`background-image:url(../notes/${NOTE_IMG[n]}.jpg)`:''}"></i>${esc(n)}</span>`).join('')}</div></div>`:''; }

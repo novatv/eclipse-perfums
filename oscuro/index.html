@@ -123,7 +123,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const wa=(text)=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(text);
 ['wa-top','wa-hero','wa-foot'].forEach(id=>document.getElementById(id).href=wa('Hola, vengo de '+SHOP_NAME+'. Quiero información sobre perfumes.'));
 let BY={};
-const imgOf=p=>p.id.startsWith('lm-')?'../img/'+p.id+'.jpg':'../img/'+p.id+'.avif';
+const imgOf=p=>(IMG[p.id]?'../'+IMG[p.id]:(p.id.startsWith('lm-')?'../img/'+p.id+'.jpg':'../img/'+p.id+'.avif'));
 const gcat=g=>g==='Hombres y Mujeres'?'Unisex':g==='Hombres'?'Hombre':g==='Mujeres'?'Mujer':'';
 function insp(p){ const m=META[p.id]||{}; if(m.inspired&&BY[m.inspired]) return BY[m.inspired].brand+' '+BY[m.inspired].name; return m.inspiredName||''; }
 function card(it,i){ const p=BY[it.id]; if(!p) return ''; const ins=insp(p); return `<article class="card" data-id="${p.id}" style="--i:${i}">${it.tag?`<span class="tag ${it.tag==='ejemplo'?'ex':''}">${esc(it.tag)}</span>`:''}<span class="pic"><img src="${imgOf(p)}" alt="" loading="lazy"></span><span class="brand">${esc(p.brand)}</span><span class="name">${esc(p.name)}</span><span class="meta">${[p.conc||'', gcat(p.gender), p.family].filter(Boolean).join(' · ')}</span>${ins?`<span class="insp">Inspirado en <b>${esc(ins)}</b></span>`:''}${it.note?`<span class="small muted">${esc(it.note)}</span>`:''}<span class="price"><span>${SHOW_PRICES&&it.price!=null?it.price+' €':'Precio a consultar'}</span><a class="btn wa" style="padding:7px 12px;font-size:13px" href="${wa('Hola, quiero pedir '+p.brand+' '+p.name+' (100 ml).')}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Pedir</a></span></article>`; }
