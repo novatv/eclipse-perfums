@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eclipse Perfums</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Karla:wght@400;500;700&display=swap">
+<style>
+/* Tienda: negro profundo y oro. Cabecera fija, hero corto, filtros, rejilla de productos 220px, ficha en panel lateral. */
+:root{--bg:#0d0b0a;--panel:#161311;--panel2:#1f1a17;--fg:#f3ece2;--fg2:#a99d8f;--line:#2d2622;--gold:#d2b36a;--gold2:#f0d79a;--accent:#b8323f;--display:"Bodoni Moda","Didot",Georgia,serif;--body:"Karla","Helvetica Neue",Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5;padding-inline:clamp(16px,3vw,32px)}
+.wrap{max-width:1160px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:clamp(36px,6vw,64px);line-height:1}
+h2{font-size:clamp(24px,3vw,34px)}
+a{color:var(--gold)}
+.muted{color:var(--fg2)}.small{font-size:13px}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(13,11,10,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:calc(-1*clamp(16px,3vw,32px));padding-inline:clamp(16px,3vw,32px)}
+header .wrap{display:flex;align-items:center;gap:18px;padding-block:12px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-size:24px;letter-spacing:.04em;text-decoration:none;color:var(--fg)}
+.logo span{color:var(--gold)}
+nav{display:flex;gap:16px;font-size:14px;flex-wrap:wrap}
+nav a{color:var(--fg);text-decoration:none;opacity:.8}nav a:hover{opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--gold);background:var(--gold);color:#1a1510;font-weight:700;text-decoration:none;cursor:pointer;font:inherit;font-weight:700;transition:transform .18s,background .18s}
+.btn:hover{background:var(--gold2)}.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn.wa{background:#25d366;border-color:#25d366;color:#07140b}
+.btn.wa:hover{background:#3ae07a}
+.cta{margin-left:auto}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:center;padding-block:48px 28px}
+.hero p{font-size:18px;max-width:52ch;color:var(--fg2)}
+.hero .pic{box-shadow:0 40px 80px -40px rgba(210,179,106,.45)}
+.pic{position:relative;display:block;width:100%;aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:#111;border:1px solid var(--line)}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-block:10px 18px;position:sticky;top:64px;background:var(--bg);z-index:5}
+.chip{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--gold);color:#1a1510;border-color:var(--gold)}
+.toolbar input{margin-left:auto;flex:1 1 200px;max-width:320px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--fg);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:6px;align-content:start;position:relative;cursor:pointer;transition:transform .22s cubic-bezier(.2,.8,.2,1),border-color .22s,box-shadow .22s;min-width:0}
+.card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 24px 40px -28px rgba(210,179,106,.5)}
+.card .brand{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.card .name{font-family:var(--display);font-size:21px;line-height:1.15}
+.card .meta{font-size:12px;color:var(--fg2)}
+.card .insp{font-size:12px;color:var(--fg2)}
+.card .insp b{color:var(--fg);font-weight:500}
+.card .price{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px}
+.card .price span{font-weight:700;color:var(--gold)}
+.tag{position:absolute;top:18px;left:18px;background:var(--accent);color:#fff;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:999px}
+.tag.ex{background:#3a3129;color:var(--fg2)}
+.empty{padding:40px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--fg2)}
+section{padding-block:40px;border-top:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+.steps div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.steps b{font-family:var(--display);font-size:34px;font-weight:400;color:var(--gold);display:block;line-height:1}
+footer{padding-block:28px;color:var(--fg2);font-size:13px;border-top:1px solid var(--line)}
+/* panel ficha */
+.sheet{position:fixed;inset:0;z-index:20;display:grid;grid-template-columns:1fr min(560px,100%);}
+.sheet .bg{background:rgba(0,0,0,.6);backdrop-filter:blur(3px)}
+.sheet .box{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:24px;display:grid;gap:18px;align-content:start;animation:slide .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+.sheet .top{display:grid;grid-template-columns:160px minmax(0,1fr);gap:18px;align-items:start}
+.close{position:absolute;top:14px;right:14px;background:var(--panel2);border:1px solid var(--line);color:var(--fg);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:18px}
+.notes{display:grid;gap:10px}
+.lvl{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:start}
+.lvl .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg2);padding-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.nchip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 5px;border:1px solid var(--line);border-radius:999px;font-size:13px;background:var(--panel2)}
+.nchip i{width:20px;height:20px;border-radius:50%;background-size:cover;background-position:center;flex:none;display:inline-block;background-color:#444}
+.acc{display:grid;gap:4px;max-width:360px}
+.acc li{list-style:none;height:22px;border-radius:3px;background:var(--panel2);position:relative;overflow:hidden}
+.acc i{position:absolute;inset:0 auto 0 0;border-radius:3px;opacity:.9}
+.acc span{position:relative;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);line-height:22px;padding-left:8px}
+@media (prefers-reduced-motion:no-preference){.card{animation:rise .5s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*35ms)}@keyframes rise{from{opacity:0;transform:translateY(14px)}} .acc i{transform-origin:left;animation:grow .8s ease-out both}@keyframes grow{from{transform:scaleX(.1)}}}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero .pic{max-width:220px}.sheet{grid-template-columns:1fr}.sheet .bg{display:none}.sheet .top{grid-template-columns:120px 1fr}.toolbar{position:static}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="#">Eclipse <span>Perfums</span></a>
+  <nav><a href="#catalogo">Catálogo</a><a href="#como">Cómo comprar</a><a href="#contacto">Contacto</a></nav>
+  <a class="btn wa cta" id="wa-top" href="#" target="_blank" rel="noopener">WhatsApp</a>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div><span class="eyebrow">Perfumes seleccionados · 100 ml</span>
+      <h1>Perfumes de Dubái y alternativas de lujo, elegidos uno a uno.</h1>
+      <p>Cada frasco de esta lista lo he probado y lo vendo yo. Mira la ficha con sus notas y, si te encaja, me escribes por WhatsApp y te digo precio y disponibilidad.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#catalogo">Ver catálogo</a><a class="btn ghost" id="wa-hero" href="#" target="_blank" rel="noopener">Pedir asesoría</a></div></div>
+    <span class="pic" id="heropic"></span>
+  </div>
+
+  <div class="toolbar" id="filters"></div>
+  <div id="catalogo" class="grid"></div>
+  <div id="empty" class="empty" hidden>Todavía no hay perfumes en esta categoría.</div>
+
+  <section id="como"><span class="eyebrow">Cómo comprar</span><h2>Sin tienda online, trato directo</h2>
+    <div class="steps"><div><b>1</b>Elige el perfume y abre su ficha para ver notas y a qué se parece.</div><div><b>2</b>Pulsa «Pedir» y te llega un mensaje de WhatsApp ya escrito con el nombre.</div><div><b>3</b>Te confirmo precio, stock y entrega en mano o envío.</div></div></section>
+
+  <section id="contacto"><span class="eyebrow">Contacto</span><h2>Escríbeme</h2><p class="muted" style="max-width:60ch">WhatsApp es la vía más rápida. También puedes pedir una muestra o preguntar por un perfume que no esté en la lista.</p><a class="btn wa" id="wa-foot" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a></section>
+</main>
+<footer class="wrap">Eclipse Perfums. Fotos y notas con fines informativos; los perfumes son de sus marcas. Precios a consultar.</footer>
+
+<div id="sheet" class="sheet" hidden><div class="bg" id="sheetbg"></div><div class="box" id="sheetbox"></div></div>
+
+<script>
+/* ===== CONFIGURACIÓN: edita aquí ===== */
+const SHOP_NAME='Eclipse Perfums';
+const WHATSAPP='';            // número con prefijo, sin + ni espacios, p. ej. 34600000000. Vacío = abre WhatsApp sin número.
+const SHOW_PRICES=true;      // true cuando quieras mostrar precios
+// Lista de perfumes a la venta: id del catálogo Olfatorio. Opcional: price, note, tag ('nuevo','top','ejemplo').
+/*__DATA__*/
+/* ===================================== */
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const wa=(text)=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(text);
+['wa-top','wa-hero','wa-foot'].forEach(id=>document.getElementById(id).href=wa('Hola, vengo de '+SHOP_NAME+'. Quiero información sobre perfumes.'));
+let BY={};
+const imgOf=p=>p.id.startsWith('lm-')?'img/'+p.id+'.jpg':'img/'+p.id+'.avif';
+const gcat=g=>g==='Hombres y Mujeres'?'Unisex':g==='Hombres'?'Hombre':g==='Mujeres'?'Mujer':'';
+function insp(p){ const m=META[p.id]||{}; if(m.inspired&&BY[m.inspired]) return BY[m.inspired].brand+' '+BY[m.inspired].name; return m.inspiredName||''; }
+function card(it,i){ const p=BY[it.id]; if(!p) return ''; const ins=insp(p); return `<article class="card" data-id="${p.id}" style="--i:${i}">${it.tag?`<span class="tag ${it.tag==='ejemplo'?'ex':''}">${esc(it.tag)}</span>`:''}<span class="pic"><img src="${imgOf(p)}" alt="" loading="lazy"></span><span class="brand">${esc(p.brand)}</span><span class="name">${esc(p.name)}</span><span class="meta">${[p.conc||'', gcat(p.gender), p.family].filter(Boolean).join(' · ')}</span>${ins?`<span class="insp">Inspirado en <b>${esc(ins)}</b></span>`:''}${it.note?`<span class="small muted">${esc(it.note)}</span>`:''}<span class="price"><span>${SHOW_PRICES&&it.price!=null?it.price+' €':'Precio a consultar'}</span><a class="btn wa" style="padding:7px 12px;font-size:13px" href="${wa('Hola, quiero pedir '+p.brand+' '+p.name+' (100 ml).')}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Pedir</a></span></article>`; }
+let filter='Todos';
+function render(){ const q=(document.getElementById('q')||{value:''}).value.trim().toLowerCase(); const list=SHOP.filter(it=>BY[it.id]).filter(it=>{const p=BY[it.id]; const okF=filter==='Todos'||gcat(p.gender)===filter||p.brand===filter; const okQ=!q||(p.brand+' '+p.name+' '+(p.family||'')+' '+Object.values(p.notes).flat().join(' ')+' '+insp(p)).toLowerCase().includes(q); return okF&&okQ;}); document.getElementById('catalogo').innerHTML=list.map(card).join(''); document.getElementById('empty').hidden=list.length>0; }
+function filters(){ const brands=[...new Set(SHOP.map(it=>BY[it.id]&&BY[it.id].brand).filter(Boolean))]; const fs=['Todos','Hombre','Mujer','Unisex',...brands]; document.getElementById('filters').innerHTML=fs.map(f=>`<button class="chip" aria-pressed="${f===filter}" data-f="${esc(f)}">${esc(f)}</button>`).join('')+'<input id="q" type="search" placeholder="Buscar por nombre, nota o parecido">'; document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.f; document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b)); render();})); document.getElementById('q').addEventListener('input',render); }
+function sheet(id){ const p=BY[id]; const ins=insp(p); const N=p.notes; const lvl=(l,a)=>a&&a.length?`<div class="lvl"><span class="lab">${l}</span><div class="chips">${a.map(n=>`<span class="nchip"><i style="${NOTE_IMG[n]?`background-image:url(notes/${NOTE_IMG[n]}.jpg)`:''}"></i>${esc(n)}</span>`).join('')}</div></div>`:'';
+  document.getElementById('sheetbox').innerHTML=`<button class="close" id="close" aria-label="Cerrar">×</button><div class="top"><span class="pic"><img src="${imgOf(p)}" alt=""></span><div><span class="eyebrow">${esc(p.brand)}</span><h2>${esc(p.name)}</h2><p class="muted small">${[p.conc||'', gcat(p.gender), p.family, p.year].filter(Boolean).join(' · ')}</p>${ins?`<p class="small">Inspirado en <b>${esc(ins)}</b></p>`:''}${p.rating?`<p class="small muted">Fragrantica: ${p.rating.toFixed(2)} / 5 con ${p.votes} votos</p>`:''}<a class="btn wa" href="${wa('Hola, quiero pedir '+p.brand+' '+p.name+' (100 ml).')}" target="_blank" rel="noopener">Pedir por WhatsApp</a></div></div>
+  <p class="muted">${esc(p.desc)}</p>
+  ${p.accords.length?`<div><span class="eyebrow">Acordes</span><ul class="acc" style="padding:0;margin:8px 0 0">${p.accords.slice(0,8).map(a=>`<li><i style="width:${a.w}%;background:${a.c||'#888'}"></i><span>${esc(a.n)}</span></li>`).join('')}</ul></div>`:''}
+  <div><span class="eyebrow">Notas</span><div class="notes" style="margin-top:8px">${N.flat?lvl('Notas',N.flat):lvl('Salida',N.top)+lvl('Corazón',N.mid)+lvl('Fondo',N.base)}</div></div>
+  <p class="small"><a href="https://novatv.github.io/olfatorio/#p-${p.id}" target="_blank" rel="noopener">Ver ficha completa en Olfatorio</a></p>`;
+  const s=document.getElementById('sheet'); s.hidden=false; document.body.style.overflow='hidden'; document.getElementById('close').onclick=closeSheet; }
+function closeSheet(){ document.getElementById('sheet').hidden=true; document.body.style.overflow=''; }
+function boot(){ DATA.forEach(p=>BY[p.id]=p); const first=SHOP.find(it=>BY[it.id]); if(first) document.getElementById('heropic').innerHTML=`<img src="${imgOf(BY[first.id])}" alt="">`; filters(); render(); }
+document.getElementById('sheetbg').addEventListener('click',closeSheet); document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+document.getElementById('catalogo').addEventListener('click',e=>{const c=e.target.closest('.card'); if(c) sheet(c.dataset.id);});
+boot();
+</script>
+</body>
+</html>
