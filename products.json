@@ -1,5 +1,18 @@
 [
-  {"id":"lm-city-of-dreams","price":45},
-  {"id":"100148","price":35},
-  {"id":"lm-sandal-wood","price":45}
+  {
+    "id": "lm-city-of-dreams",
+    "price": 45
+  },
+  {
+    "id": "100148",
+    "price": 35
+  },
+  {
+    "id": "lm-sandal-wood",
+    "price": 45
+  },
+  {
+    "id": "lm-velvet-apple",
+    "price": 45
+  }
 ]
