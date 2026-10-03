@@ -48,10 +48,10 @@ nav a{color:var(--ink);text-decoration:none;opacity:.8}nav a:hover{opacity:1}
 .index a span{font-family:var(--display);font-size:18px;color:var(--gold);margin-right:10px;letter-spacing:0}
 .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,96px);align-items:center;padding-block:clamp(56px,9vw,130px);border-top:1px solid var(--line);position:relative}
 .row:nth-child(even) .fig{order:2}
-.fig{position:relative;aspect-ratio:4/5;display:grid;place-items:center;border:1px solid var(--line);border-radius:2px;background:radial-gradient(ellipse at 50% 60%,rgba(201,169,110,.18),transparent 65%),var(--bg2)}
+.fig{position:relative;aspect-ratio:3/4;display:grid;place-items:center;border:1px solid var(--line);border-radius:2px;background:radial-gradient(ellipse at 50% 60%,rgba(201,169,110,.18),transparent 65%),var(--bg2)}
 .fig::before{content:"";position:absolute;inset:14px;border:1px solid var(--line);opacity:.6;pointer-events:none}
 .fig .num{position:absolute;top:28px;left:32px;font-family:var(--display);font-size:28px;color:var(--gold);font-style:italic}
-.fig img{width:auto;height:auto;max-width:72%;max-height:84%;object-fit:contain;filter:drop-shadow(0 40px 36px rgba(0,0,0,.65));transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.fig img{width:auto;height:auto;max-width:84%;max-height:92%;object-fit:contain;filter:drop-shadow(0 40px 36px rgba(0,0,0,.65));transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .row:hover .fig img{transform:translateY(-8px) scale(1.03)}
 .txt{display:grid;gap:20px;min-width:0}
 .txt .brand{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
