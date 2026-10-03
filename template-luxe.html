@@ -93,26 +93,6 @@ footer{padding-block:34px;color:var(--ink2);font-size:11px;letter-spacing:.2em;t
 .fig .ring{position:absolute;inset:8%;border-radius:50%;border:1px solid var(--line);opacity:.5;animation:spin 60s linear infinite}
 .fig .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.09) 50%,transparent 60%);transform:translateX(-120%);animation:shine 6s ease-in-out 1s infinite;pointer-events:none}
 @keyframes shine{0%,30%{transform:translateX(-120%)}60%,100%{transform:translateX(120%)}}
-/* ---- slider de vídeos ---- */
-.videos{padding-block:90px 20px;border-top:1px solid var(--line)}
-.videos .head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
-.slider{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none}
-.slider::-webkit-scrollbar{display:none}
-.vid{flex:0 0 min(420px,86vw);scroll-snap-align:start;border:1px solid var(--line);background:var(--bg2);display:grid;gap:10px;padding:10px;border-radius:2px}
-.vid .frame{position:relative;aspect-ratio:16/9;background:#000 center/cover;cursor:pointer;overflow:hidden}
-.vid .frame.short{aspect-ratio:9/16;max-height:420px}
-.vid .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.6))}
-.vid .play{position:absolute;inset:0;display:grid;place-items:center;z-index:2}
-.vid .play span{width:64px;height:64px;border-radius:50%;border:1px solid var(--gold2);background:rgba(14,13,11,.55);display:grid;place-items:center;color:var(--gold2);font-size:20px;transition:transform .25s,background .25s}
-.vid .frame:hover .play span{transform:scale(1.08);background:var(--gold);color:#15130f}
-.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
-.vid .t{font-size:14px;color:var(--ink);line-height:1.35}
-.vid .c{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2)}
-.sbtns{display:flex;gap:8px}
-.sbtns button{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold2);cursor:pointer;font-size:18px}
-.sbtns button:hover{background:var(--gold);color:#15130f}
-.dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
-.dots i{width:22px;height:2px;background:var(--line)}.dots i.on{background:var(--gold)}
 
 </style>
 </head>
@@ -130,7 +110,6 @@ footer{padding-block:34px;color:var(--ink2);font-size:11px;letter-spacing:.2em;t
 <div class="marquee"><div id="mq"></div></div>
 <div class="index" id="index"></div>
 <main id="lista"></main>
-<section class="videos" id="videos"><div class="head"><div><span class="eyebrow">En vídeo</span><h2 style="margin-top:10px">Así se ven <i>en movimiento</i>.</h2></div><div class="sbtns"><button type="button" id="sprev" aria-label="Anterior">‹</button><button type="button" id="snext" aria-label="Siguiente">›</button></div></div><div class="slider" id="slider"></div><div class="dots" id="dots"></div></section>
 <section class="how" id="como"><div><b>I</b><span>Elige el perfume y lee sus notas y acordes.</span></div><div><b>II</b><span>Pulsa «Pedir»: WhatsApp se abre con el nombre ya escrito.</span></div><div><b>III</b><span>Te confirmo disponibilidad y la entrega en mano o el envío.</span></div></section>
 <section class="contact" id="contacto"><span class="eyebrow">Contacto</span><h2>¿Buscas algo que no está? <i>Pregúntame.</i></h2><a class="btn solid" id="wa-foot" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a></section>
 <footer><span>Eclipse Perfums</span><span>Fotos y notas con fines informativos · los perfumes son de sus marcas</span></footer>
@@ -140,7 +119,6 @@ footer{padding-block:34px;color:var(--ink2);font-size:11px;letter-spacing:.2em;t
 const SHOP_NAME='Eclipse Perfums';
 const WHATSAPP='';
 const SHOW_PRICES=true;
-const VIDEOS=[{"id": "ACXXI-Rt8NQ", "title": "Nuevo lanzamiento de fragancia de Loui Martin", "channel": "Max Smells", "product": "Loui Martin"}, {"id": "SER5BY21UUo", "title": "Clonazo árabe de un famoso perfume de diseñador: Ameer Al Arab", "channel": "Rastreador de perfumes", "product": "Ameer Al Arab Imperium"}, {"id": "U3xjelverAA", "title": "Parfums Loui Martin", "channel": "Sandrineparfum2A", "product": "Loui Martin"}, {"id": "vKiLDV1OkyY", "title": "Ameer Al Arab Asdaaf, ¡alerta clonazo!", "channel": "Perfumones", "product": "Ameer Al Arab Imperium"}, {"id": "fn5HoZMRFFs", "title": "Unboxing y presentación: Oud Cadence, Loui Martin", "channel": "MaisonValentry", "product": "Loui Martin"}, {"id": "pYE1bhjq7sQ", "title": "Ameer Al Arab Imperium de Asdaaf, dupe de Y EDT de YSL", "channel": "Senda Olfativa", "product": "Ameer Al Arab Imperium"}, {"id": "GYALqms2p8o", "title": "Loui Martin Mid-Night Club Intense: unboxing y primer olor", "channel": "The King Of Hidden Gems", "product": "Loui Martin"}, {"id": "K0dlVaC4omQ", "title": "Ameer Al Arab Imperium, Príncipe de Arabia", "channel": "Georgette's Fragrance World", "product": "Ameer Al Arab Imperium"}, {"id": "fk0EjFRq5io", "title": "California Dream, Loui Martin 100 ml", "channel": "l'élégance boutique", "product": "Loui Martin", "short": true}];
 /*__DATA__*/
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const wa=t=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(t);
@@ -162,17 +140,8 @@ function row(it,i){ const p=BY[it.id]; if(!p) return ''; const ins=insp(p); cons
     <div class="buy"><span class="price">${SHOW_PRICES&&it.price!=null?it.price+' €':'—'}<small>${SHOW_PRICES&&it.price!=null?'frasco de 100 ml':'precio a consultar'}</small></span><a class="btn solid" href="${wa('Hola, quiero pedir '+p.brand+' '+p.name+' (100 ml).')}" target="_blank" rel="noopener">Pedir</a><a class="btn" href="https://novatv.github.io/olfatorio/#p-${p.id}" target="_blank" rel="noopener">Ficha</a></div>
   </div></article>`; }
 
-function videos(){ const sl=document.getElementById('slider'); if(!VIDEOS.length){ document.getElementById('videos').hidden=true; return; }
-  sl.innerHTML=VIDEOS.map((v,i)=>`<div class="vid"><div class="frame ${v.short?'short':''}" data-id="${v.id}" style="background-image:url(https://i.ytimg.com/vi/${v.id}/hqdefault.jpg)"><div class="play"><span>▶</span></div></div><span class="t">${esc(v.title)}</span><span class="c">${esc(v.channel||'')}${v.product?' · '+esc(v.product):''}</span></div>`).join('');
-  sl.querySelectorAll('.frame').forEach(f=>f.addEventListener('click',()=>{ f.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${f.dataset.id}?autoplay=1&rel=0&modestbranding=1" title="Vídeo" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>`; }));
-  const dots=document.getElementById('dots'); dots.innerHTML=VIDEOS.map((v,i)=>`<i class="${i===0?'on':''}"></i>`).join('');
-  const step=()=>sl.querySelector('.vid').getBoundingClientRect().width+18;
-  document.getElementById('sprev').onclick=()=>sl.scrollBy({left:-step(),behavior:'smooth'}); document.getElementById('snext').onclick=()=>sl.scrollBy({left:step(),behavior:'smooth'});
-  sl.addEventListener('scroll',()=>{ const i=Math.round(sl.scrollLeft/step()); dots.querySelectorAll('i').forEach((d,k)=>d.classList.toggle('on',k===i)); },{passive:true});
-  let auto=setInterval(()=>{ if(sl.querySelector('iframe')) return; const max=sl.scrollWidth-sl.clientWidth; sl.scrollBy({left: sl.scrollLeft>=max-4?-max:step(), behavior:'smooth'}); },5000); sl.addEventListener('pointerdown',()=>clearInterval(auto));
-}
 document.addEventListener('pointermove',e=>{ const f=e.target.closest('.fig'); document.querySelectorAll('.fig .stage').forEach(st=>{ if(f&&st.parentElement===f){ const r=f.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; st.style.transform=`rotateY(${x*16}deg) rotateX(${-y*12}deg)`; } else st.style.transform=''; }); },{passive:true});
-function boot(){ DATA.forEach(p=>BY[p.id]=p); videos(); const L=SHOP.filter(it=>BY[it.id]);
+function boot(){ DATA.forEach(p=>BY[p.id]=p); const L=SHOP.filter(it=>BY[it.id]);
   document.getElementById('lista').innerHTML=L.length?L.map(row).join(''):'<div class="empty">Todavía no hay perfumes en la lista.</div>';
   document.getElementById('index').innerHTML=L.map((it,i)=>`<a href="#p${i+1}"><span>${['I','II','III','IV','V','VI','VII','VIII','IX','X'][i]||i+1}</span>${esc(BY[it.id].name)}</a>`).join('');
   const names=L.map(it=>BY[it.id].brand+' · '+BY[it.id].name); const mq=names.concat(names).map(n=>`<span>${esc(n)}</span>`).join(''); document.getElementById('mq').innerHTML=mq+mq;
