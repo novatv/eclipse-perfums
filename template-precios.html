@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precios · Eclipse Perfums</title>
+<meta name="description" content="Lista de precios de Eclipse Perfums: todos los perfumes de 100 ml con su precio, buscador y pedido por WhatsApp.">
+<meta name="theme-color" content="#0e0d0b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230e0d0b'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23c9a96e' stroke-width='2'/%3E%3Ccircle cx='27' cy='27' r='10' fill='%23e9d3a2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Lista de precios: misma paleta que la portada, pero sin efectos pesados. Lo importante es leer el precio de un vistazo. */
+:root{--bg:#0e0d0b;--bg2:#15130f;--ink:#efe7d8;--ink2:#a79c88;--gold:#c9a96e;--gold2:#e9d3a2;--line:rgba(201,169,110,.28);--display:"Cormorant Garamond",Georgia,serif;--body:"Jost","Helvetica Neue",Arial,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--display);font-size:24px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:12px}
+.logo b{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 38% 38%,var(--gold2) 0 40%,transparent 42%);box-shadow:inset 0 0 0 1px var(--gold);display:inline-block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;border:1px solid var(--gold);color:var(--gold2);text-decoration:none;font-size:11px;letter-spacing:.24em;text-transform:uppercase;background:transparent;cursor:pointer;font-family:var(--body);white-space:nowrap;transition:background .2s,color .2s}
+.btn:hover{background:var(--gold);color:#15130f}
+.btn.solid{background:var(--gold);color:#15130f}.btn.solid:hover{background:var(--gold2)}
+.btn.wa{background:#25d366;border-color:#25d366;color:#07140b}.btn.wa:hover{background:#3ae07c}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:400}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(42px,7vw,88px);line-height:.95;margin:14px 0 10px;background:linear-gradient(100deg,#f6ecd6,#e9d3a2 40%,#b8955a 60%,#f3e4bf);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 i{font-style:italic}
+.lead{color:var(--ink2);max-width:60ch;margin:0 0 30px}
+.tools{display:grid;gap:14px;padding:18px 0 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:sticky;top:0;background:linear-gradient(var(--bg) 85%,transparent);z-index:5}
+.tools .line{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:10px 18px;background:rgba(255,255,255,.02)}
+.search input{flex:1;background:none;border:0;outline:0;color:var(--ink);font-family:var(--body);font-size:15px;font-weight:300}
+.search input::placeholder{color:var(--ink2)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips button,.sort button{font-family:var(--body);font-size:10px;letter-spacing:.24em;text-transform:uppercase;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink2);cursor:pointer;transition:all .2s}
+.chips button:hover,.sort button:hover{color:var(--gold2);border-color:var(--gold)}
+.chips button.on,.sort button.on{background:var(--gold);color:#15130f;border-color:var(--gold)}
+.sort{display:flex;gap:8px;align-items:center;margin-left:auto}
+.sort span{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);margin-right:4px}
+.count{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2);padding:18px 0 6px}
+.list{display:grid;gap:0}
+.item{display:grid;grid-template-columns:84px minmax(0,1.6fr) minmax(0,1fr) auto auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);transition:background .2s}
+.item:hover{background:linear-gradient(90deg,rgba(201,169,110,.06),transparent 70%)}
+.item .th{width:84px;height:104px;display:grid;place-items:center;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 70%,rgba(201,169,110,.18),transparent 70%),var(--bg2);border-radius:2px}
+.item .th img{max-width:76%;max-height:88%;width:auto;height:auto;filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
+.item .nm{min-width:0}
+.item .brand{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.item .name{font-family:var(--display);font-size:28px;line-height:1.05;color:var(--ink)}
+.item .name small{display:block;font-family:var(--body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);margin-top:6px}
+.item .meta{font-size:12.5px;color:var(--ink2);min-width:0}
+.item .meta b{color:var(--ink);font-weight:400}
+.item .price{font-family:var(--display);font-size:40px;line-height:1;color:var(--gold2);white-space:nowrap;text-align:right}
+.item .price small{display:block;font-family:var(--body);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink2);margin-top:4px}
+.item .act{display:flex;gap:8px}
+.empty{padding:60px 0;text-align:center;color:var(--ink2)}
+.foot{padding:40px 0 60px;color:var(--ink2);font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:30px}
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:30;width:58px;height:58px;border-radius:50%;background:#25d366;color:#07140b;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(37,211,102,.6)}
+@media (max-width:860px){
+  .item{grid-template-columns:64px minmax(0,1fr) auto;grid-template-areas:"th nm price" "th meta price" "th act act";gap:6px 14px}
+  .item .th{grid-area:th;width:64px;height:80px}.item .nm{grid-area:nm}.item .meta{grid-area:meta}.item .price{grid-area:price;font-size:32px}.item .act{grid-area:act;margin-top:8px}
+  .item .name{font-size:22px}.sort{margin-left:0}.tools{position:static}
+}
+@media print{
+  body{background:#fff;color:#111}:root{--ink:#111;--ink2:#555;--gold:#8a6a2f;--gold2:#8a6a2f;--line:#ccc}
+  .tools,.act,.wa-float,.btn,.foot a{display:none!important}
+  h1{color:#111;-webkit-text-fill-color:#111;background:none}
+  .item{break-inside:avoid;grid-template-columns:60px 1.6fr 1fr auto}.item .th{background:none;border:0}.item .price{color:#111}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a class="logo" href="../"><b></b>Eclipse Perfums</a><div style="display:flex;gap:10px"><a class="btn" href="../">Colección</a><a class="btn wa" id="wa-top" href="#" target="_blank" rel="noopener">WhatsApp</a></div></header>
+<section style="padding:48px 0 10px">
+  <span class="eyebrow">Lista de precios · frascos de 100 ml</span>
+  <h1>Todos los <i>precios</i>, de un vistazo.</h1>
+  <p class="lead">Busca por nombre o marca, ordena por precio y pide directamente por WhatsApp. Precios en euros, impuestos incluidos. Entrega en mano o envío.</p>
+</section>
+<div class="tools" id="tools">
+  <div class="line"><label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscar perfume o marca…" autocomplete="off"></label>
+    <div class="sort"><span>Orden</span><button data-s="idx" class="on">Lista</button><button data-s="asc">Precio ↑</button><button data-s="desc">Precio ↓</button><button data-s="name">A–Z</button></div></div>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="count" id="count"></div>
+<div class="list" id="list"></div>
+<div class="foot"><span>Eclipse Perfums · precios orientativos, confirmo stock por WhatsApp</span><a href="javascript:print()">Imprimir lista</a></div>
+</div>
+<a id="wa-float" class="wa-float" href="#" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.1.7a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.2-.2-.2-.5-.4z"/></svg></a>
+<script>
+const SHOP_NAME='Eclipse Perfums';
+const WHATSAPP='';
+const BASE='../';
+/*__DATA__*/
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const wa=t=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(t);
+['wa-top','wa-float'].forEach(id=>document.getElementById(id).href=wa('Hola, vengo de '+SHOP_NAME+'. Quiero información sobre perfumes.'));
+const BY={}; DATA.forEach(p=>BY[p.id]=p);
+const imgOf=p=>BASE+(IMG[p.id]?IMG[p.id]:(p.id.startsWith('lm-')?'img/'+p.id+'.jpg':'img/'+p.id+'.avif'));
+const gcat=g=>g==='Hombres y Mujeres'?'unisex':g==='Hombres'?'hombre':g==='Mujeres'?'mujer':'';
+const fmt=n=>(Math.round(n*100)/100).toLocaleString('es-ES',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const insp=p=>{const m=META[p.id]||{}; if(m.inspired&&BY[m.inspired]) return BY[m.inspired].brand+' '+BY[m.inspired].name; return m.inspiredName||'';};
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/\p{M}/gu,'');
+const L=SHOP.filter(it=>BY[it.id]).map((it,i)=>({...it,p:BY[it.id],i}));
+let q='',brand='',sort='idx';
+const brands=[...new Set(L.map(x=>x.p.brand))];
+document.getElementById('chips').innerHTML=`<button class="on" data-b="">Todas</button>`+brands.map(b=>`<button data-b="${esc(b)}">${esc(b)}</button>`).join('');
+function render(){ let R=L.filter(x=>(!brand||x.p.brand===brand)&&(!q||norm(x.p.brand+' '+x.p.name+' '+insp(x.p)).includes(norm(q))));
+  if(sort==='asc') R=R.slice().sort((a,b)=>(a.price??1e9)-(b.price??1e9)); if(sort==='desc') R=R.slice().sort((a,b)=>(b.price??-1)-(a.price??-1)); if(sort==='name') R=R.slice().sort((a,b)=>a.p.name.localeCompare(b.p.name,'es'));
+  document.getElementById('count').textContent=R.length+' de '+L.length+' perfumes';
+  document.getElementById('list').innerHTML=R.length?R.map(x=>{const p=x.p; const ins=insp(p); return `<div class="item"><a class="th" href="../#p${x.i+1}"><img src="${imgOf(p)}" alt="" loading="lazy"></a>
+    <div class="nm"><span class="brand">${esc(p.brand)}</span><span class="name">${esc(p.name)}<small>${p.conc?esc(p.conc)+' · ':''}100 ml${p.gender?' · '+gcat(p.gender):''}</small></span></div>
+    <div class="meta">${ins?`Se parece a <b>${esc(ins)}</b><br>`:''}${p.family?esc(p.family):''}${p.accords&&p.accords.length?' · '+p.accords.slice(0,3).map(a=>esc(a.n)).join(', '):''}</div>
+    <div class="price">${x.price!=null?fmt(x.price)+' €':'—'}<small>${x.price!=null?'frasco 100 ml':'a consultar'}</small></div>
+    <div class="act"><a class="btn wa" href="${wa('Hola, quiero pedir '+p.brand+' '+p.name+' (100 ml)'+(x.price!=null?' a '+fmt(x.price)+' €':'')+'.')}" target="_blank" rel="noopener">Pedir</a><a class="btn" href="../#p${x.i+1}">Ver</a></div></div>`;}).join(''):'<div class="empty">No hay perfumes que coincidan.</div>'; }
+document.getElementById('q').addEventListener('input',e=>{q=e.target.value.trim();render();});
+document.getElementById('chips').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; brand=b.dataset.b; document.querySelectorAll('#chips button').forEach(x=>x.classList.toggle('on',x===b)); render();});
+document.querySelector('.sort').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b) return; sort=b.dataset.s; document.querySelectorAll('.sort button').forEach(x=>x.classList.toggle('on',x===b)); render();});
+render();
+</script>
+</body>
+</html>

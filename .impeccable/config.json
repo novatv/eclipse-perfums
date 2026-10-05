@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "template-precios.html"
+        ],
+        "createdAt": "2026-10-05T17:31:03.099Z",
+        "reason": "misma cabecera dorada que la portada aprobada por el usuario (lujo champán)"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "template-precios.html"
+        ],
+        "createdAt": "2026-10-05T17:31:03.160Z",
+        "reason": "botón WhatsApp flotante idéntico al de la portada aprobada"
+      }
+    ]
+  }
+}
