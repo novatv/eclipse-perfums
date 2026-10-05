@@ -20,6 +20,15 @@
         ],
         "createdAt": "2026-10-05T17:31:03.160Z",
         "reason": "botón WhatsApp flotante idéntico al de la portada aprobada"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "template-precios.html"
+        ],
+        "createdAt": "2026-10-05T17:32:41.527Z",
+        "reason": "mismo halo champán tras el frasco que usa la portada aprobada por el usuario; coherencia de marca"
       }
     ]
   }
